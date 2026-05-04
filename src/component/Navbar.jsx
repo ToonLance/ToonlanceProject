@@ -21,6 +21,8 @@ const Navbar = () => {
       <Link href="/pricing">Pricing</Link>
       <Link href="/testimonials">Testimonials</Link>
       <Link href="/contact">Contact</Link>
+      <Link href="/login" className='singup'>Login</Link>
+      <Link href="/signup" className='singup'>Signup</Link>
       </div>
     </nav>
   )

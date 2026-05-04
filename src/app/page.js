@@ -1,11 +1,22 @@
 import Navbar from "../component/Navbar";
 import Image from "next/image";
 
-export default function Home() {
+export default function Page() {
   return (
     <div>
-    <h1 className="text-9xl text-center mt-20">Toonlance <br/>
-Cartoon & Anime <br/> Animation</h1>
-</div>
+
+      <video
+        width="400"
+        autoPlay
+        muted
+        loop
+        className="aspect-video rounded-lg home-bg"
+      >
+        <source src="/trans.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      <Image className="scrollicon" src="/icon.png" alt="icon" width={40} height={40} />
+    </div>
   );
 }
