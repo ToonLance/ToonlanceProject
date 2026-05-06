@@ -2,14 +2,14 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
 }
 
 
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #000000;
     --foreground: #ededed;
   }
 }
@@ -42,14 +42,16 @@ body {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-style: italic;
 }
-span{
-  z-index: 99;
+span.siize-100 {
+  font-size: 50px;
+  cursor: pointer;
+  color: white;
 }
-.scrollicon{
-  height: 100px;
-  width: 150px;
+.scrollicon {
   position: absolute;
-  top: 90%;
+  top: 85%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
+  font-size: 80px;
+  color: white;
 }

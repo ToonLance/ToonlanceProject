@@ -12,7 +12,7 @@ const Navbar = () => {
   return (
      <nav className='flex gap-16 justify-around  mt-10'>
       <div className="logo">
-        <h1>LOGO</h1>
+        <h1>TOONLANCE</h1>
       </div>
       <div className="navlinks flex gap-16">
       <Link href="/">Home</Link>
