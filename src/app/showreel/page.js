@@ -49,21 +49,21 @@ const page = () => {
     <div>
 
       <div className='heading' ref={headingRef}>
-        <h1 className='text-9xl mt-14 text-center'>SHOWREEL</h1>
+        <h1 className='text-4xl lg:text-9xl mt-14 text-center'>SHOWREEL</h1>
       </div>
 
-      <div className='flex gap-6 align-bottom justify-center mt-12'>
+      <div className='flex gap-6 align-bottom justify-center mt-12 flex-wrap'>
 
         <video ref={el => videosRef.current[0] = el} width="400" autoPlay muted loop className='aspect-video rounded-lg'>
-          <source src="projectfile.mp4" type="video/mp4" />
+          <source src="s2.mp4" type="video/mp4" />
         </video>
 
         <video ref={el => videosRef.current[1] = el} width="400" autoPlay muted loop className='aspect-video rounded-lg'>
-          <source src="projectfile.mp4" type="video/mp4" />
+          <source src="Toonlance_Showreel.mp4" type="video/mp4" />
         </video>
 
         <video ref={el => videosRef.current[2] = el} width="400" autoPlay muted loop className='aspect-video rounded-lg'>
-          <source src="projectfile.mp4" type="video/mp4" />
+          <source src="showreel.mp4" type="video/mp4" />
         </video>
 
       </div>
