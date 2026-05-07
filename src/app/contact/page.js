@@ -1,193 +1,253 @@
-import React from 'react'
+"use client";
 
 const page = () => {
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+
+    const response = await fetch("https://formspree.io/f/myzenzjg", {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    const formMessage = document.getElementById("formMessage");
+
+    if (response.ok) {
+      formMessage.classList.remove("hidden");
+      formMessage.innerHTML =
+        "<p class='text-green-400'>Thanks! we will reach out in 24 Hr</p>";
+
+      e.target.reset();
+    } else {
+      formMessage.classList.remove("hidden");
+      formMessage.innerHTML =
+        "<p class='text-red-400'>Something went wrong. Try again.</p>";
+    }
+  };
+
   return (
     <div>
-<section
-  id="contact"
-  className="bg-black text-white py-20 px-5"
->
-  <div className="max-w-7xl mx-auto">
-    
-    <h2 className="text-4xl md:text-6xl font-bold text-center mb-14">
-      Start Your <span className="text-gray-400">Animation Project</span>
-    </h2>
-
-    <div className="grid lg:grid-cols-2 gap-10">
-      
-      {/* Left Side */}
-      <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm">
-        
-        <h3 className="text-3xl font-semibold mb-2">
-          Get in Touch
-        </h3>
-
-        <p className="text-gray-400 mb-8">
-          We're just a message away
-        </p>
-
-        <div className="space-y-6">
-          
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center text-xl">
-              <i className="fas fa-envelope"></i>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-lg">Email</h4>
-              <p className="text-gray-400">
-                toonlanceservice@gmail.com
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center text-xl">
-              <i className="fab fa-discord"></i>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-lg">Discord</h4>
-              <p className="text-gray-400">@toonlance</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center text-xl">
-              <i className="fas fa-clock"></i>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-lg">
-                Response Time
-              </h4>
-              <p className="text-gray-400">
-                Within 24 hours
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      {/* Form */}
-      <form
-        className="bg-white/5 border border-white/10 rounded-3xl p-8 space-y-6"
-        id="contactForm"
-        action="https://formspree.io/f/myzenzjg"
-        method="POST"
+      <section
+        id="contact"
+        className="bg-black text-white py-20 px-5"
       >
-        
-        <div className="grid md:grid-cols-2 gap-5">
-          
-          <div>
-            <label className="block mb-2 text-sm text-gray-300">
-              Name *
-            </label>
+        <div className="max-w-7xl mx-auto">
 
-            <input
-              type="text"
-              name="name"
-              required
-              className="w-full bg-black border border-white/15 rounded-xl px-4 py-3 outline-none focus:border-white transition"
-            />
-          </div>
+          <h2 className="text-4xl md:text-6xl font-bold text-center mb-14">
+            Start Your <span className="text-gray-400">Animation Project</span>
+          </h2>
 
-          <div>
-            <label className="block mb-2 text-sm text-gray-300">
-              Email *
-            </label>
+          <div className="grid lg:grid-cols-2 gap-10">
 
-            <input
-              type="email"
-              name="email"
-              required
-              className="w-full bg-black border border-white/15 rounded-xl px-4 py-3 outline-none focus:border-white transition"
-            />
-          </div>
+            {/* Left Side */}
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm">
 
-        </div>
+              <h3 className="text-3xl font-semibold mb-2">
+                Get in Touch
+              </h3>
 
-        <div>
-          <label className="block mb-2 text-sm text-gray-300">
-            Discord Username
-          </label>
+              <p className="text-gray-400 mb-8">
+                We're just a message away
+              </p>
 
-          <input
-            type="text"
-            name="discord"
-            className="w-full bg-black border border-white/15 rounded-xl px-4 py-3 outline-none focus:border-white transition"
-          />
-        </div>
+              <div className="space-y-6">
 
-        <div className="grid md:grid-cols-2 gap-5">
-          
-          <div>
-            <label className="block mb-2 text-sm text-gray-300">
-              Budget *
-            </label>
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center text-xl">
+                    <i className="fas fa-envelope"></i>
+                  </div>
 
-            <input
-              type="text"
-              name="budget"
-              placeholder="$350 - $5000"
-              required
-              className="w-full bg-black border border-white/15 rounded-xl px-4 py-3 outline-none focus:border-white transition"
-            />
-          </div>
+                  <div>
+                    <h4 className="font-semibold text-lg">Email</h4>
+                    <p className="text-gray-400">
+                      toonlanceservice@gmail.com
+                    </p>
+                  </div>
+                </div>
 
-          <div>
-            <label className="block mb-2 text-sm text-gray-300">
-              Service *
-            </label>
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center text-xl">
+                    <i className="fab fa-discord"></i>
+                  </div>
 
-            <select
-              name="service"
-              required
-              className="w-full bg-black border border-white/15 rounded-xl px-4 py-3 outline-none focus:border-white transition"
+                  <div>
+                    <h4 className="font-semibold text-lg">Discord</h4>
+                    <p className="text-gray-400">@toonlance</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center text-xl">
+                    <i className="fas fa-clock"></i>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold text-lg">
+                      Response Time
+                    </h4>
+                    <p className="text-gray-400">
+                      Within 24 hours
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            {/* Form */}
+            <form
+              onSubmit={handleSubmit}
+              className="bg-white/5 border border-white/10 rounded-3xl p-8 space-y-6"
             >
-              <option value="">Select</option>
-              <option>2D Animation</option>
-              <option>Storyboard</option>
-              <option>Character Design</option>
-              <option>Background Art</option>
-              <option>Cartoon Series</option>
-            </select>
+
+              <div className="grid md:grid-cols-2 gap-5">
+
+                {/* Name */}
+                <div>
+                  <label className="block mb-2 text-sm text-gray-300">
+                    Name *
+                  </label>
+
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    placeholder="John Doe"
+                    className="w-full bg-black border border-white/15 rounded-xl px-4 py-3 outline-none focus:border-white transition"
+                  />
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label className="block mb-2 text-sm text-gray-300">
+                    Email *
+                  </label>
+
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="john@gmail.com"
+                    className="w-full bg-black border border-white/15 rounded-xl px-4 py-3 outline-none focus:border-white transition"
+                  />
+                </div>
+
+              </div>
+
+              {/* Discord */}
+              <div>
+                <label className="block mb-2 text-sm text-gray-300">
+                  Discord Username
+                </label>
+
+                <input
+                  type="text"
+                  name="discord"
+                  placeholder="@username"
+                  className="w-full bg-black border border-white/15 rounded-xl px-4 py-3 outline-none focus:border-white transition"
+                />
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-5">
+
+                {/* Budget */}
+                <div>
+                  <label className="block mb-2 text-sm text-gray-300">
+                    Budget *
+                  </label>
+
+                  <input
+                    type="text"
+                    name="budget"
+                    placeholder="$350 - $5000"
+                    required
+                    className="w-full bg-black border border-white/15 rounded-xl px-4 py-3 outline-none focus:border-white transition"
+                  />
+                </div>
+
+                {/* Service */}
+                <div>
+                  <label className="block mb-2 text-sm text-gray-300">
+                    Service *
+                  </label>
+
+                  <select
+                    name="service"
+                    required
+                    className="w-full bg-black border border-white/15 rounded-xl px-4 py-3 outline-none focus:border-white transition"
+                  >
+                    <option value="">Select</option>
+                    <option>2D Animation</option>
+                    <option>Storyboard</option>
+                    <option>Character Design</option>
+                    <option>Background Art</option>
+                    <option>Cartoon Series</option>
+                  </select>
+                </div>
+
+              </div>
+
+              {/* Timeline */}
+              <div>
+                <label className="block mb-2 text-sm text-gray-300">
+                  Project Timeline
+                </label>
+
+                <select
+                  name="timeline"
+                  className="w-full bg-black border border-white/15 rounded-xl px-4 py-3 outline-none focus:border-white transition"
+                >
+                  <option value="">Select Timeline</option>
+                  <option>1 Week</option>
+                  <option>2 Weeks</option>
+                  <option>1 Month</option>
+                  <option>2-3 Months</option>
+                  <option>Flexible</option>
+                </select>
+              </div>
+
+              {/* Message */}
+              <div>
+                <label className="block mb-2 text-sm text-gray-300">
+                  Project Details *
+                </label>
+
+                <textarea
+                  name="message"
+                  rows={5}
+                  required
+                  placeholder=""
+                  className="w-full bg-black border border-white/15 rounded-xl px-4 py-3 outline-none focus:border-white transition resize-none"
+                ></textarea>
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full bg-white text-black py-4 rounded-xl font-semibold hover:bg-gray-200 transition duration-300"
+              >
+                Send Inquiry{" "}
+                <i className="fas fa-paper-plane ml-2"></i>
+              </button>
+
+              {/* Success/Error Message */}
+              <div
+                id="formMessage"
+                className="mt-4 hidden text-center"
+              ></div>
+
+            </form>
+
           </div>
-
         </div>
-
-        <div>
-          <label className="block mb-2 text-sm text-gray-300">
-            Project Details *
-          </label>
-
-          <textarea
-            name="message"
-            rows={5}
-            required
-            className="w-full bg-black border border-white/15 rounded-xl px-4 py-3 outline-none focus:border-white transition resize-none"
-          ></textarea>
-        </div>
-
-        <button
-          type="submit"
-          className="w-full bg-white text-black py-4 rounded-xl font-semibold hover:bg-gray-200 transition duration-300"
-        >
-          Send Inquiry <i className="fas fa-paper-plane ml-2"></i>
-        </button>
-
-        <div
-          id="formMessage"
-          className="mt-4 hidden"
-        ></div>
-      </form>
-
+      </section>
     </div>
-  </div>
-</section>
-    </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
