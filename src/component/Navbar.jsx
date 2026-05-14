@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchApi } from "@/api/api";
+import { fetchApi } from "@/app/api/api";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 

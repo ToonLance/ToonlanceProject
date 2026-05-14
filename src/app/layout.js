@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/component/Navbar";
+import { AuthProvider } from "./api/Provider";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,8 +27,11 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&icon_names=keyboard_double_arrow_up" />
       </head>
       <body className="min-h-full flex flex-col">
-        <Navbar/>
-        {children}</body>
+        <AuthProvider>
+         <Navbar/>
+        {children}
+        </AuthProvider>
+        </body>
     </html>
   );
 }
