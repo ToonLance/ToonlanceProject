@@ -1,70 +1,50 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function ClientsPage() {
-  const clients = [
-    {
-      _id: "1",
-      clientName: "John Smith",
-      clientEmail: "john@gmail.com",
-      totalProjects: 2,
-    },
-    {
-      _id: "2",
-      clientName: "Sarah Wilson",
-      clientEmail: "sarah@gmail.com",
-      totalProjects: 1,
-    },
-  ];
+  const [clients, setClients] = useState([]);
+
+  useEffect(() => {
+    fetchClients();
+  }, []);
+
+  const fetchClients = async () => {
+    const res = await fetch("/api/clients");
+    const data = await res.json();
+
+    setClients(data);
+  };
 
   return (
     <div className="p-8">
+      <h1 className="text-4xl font-bold mb-8">
+        Clients
+      </h1>
 
-      <div className="flex justify-between items-center mb-10">
-        <h1 className="text-4xl font-bold">
-          Clients
-        </h1>
-
-        <div className="bg-purple-600 px-4 py-2 rounded-xl">
-          Total Clients: {clients.length}
-        </div>
-      </div>
-
-      <div className="grid gap-5">
+      <div className="space-y-4">
         {clients.map((client) => (
-          <div
-            key={client._id}
-            className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6"
+          <Link
+            key={client.clientEmail}
+            href={`/admin/clients/${encodeURIComponent(
+              client.clientEmail
+            )}`}
           >
-            <div className="flex justify-between items-center">
+            <div className="bg-zinc-900 p-6 rounded-2xl border border-zinc-800">
+              <h2 className="text-xl font-semibold">
+                {client.clientName}
+              </h2>
 
-              <div>
-                <h2 className="text-2xl font-semibold">
-                  {client.clientName}
-                </h2>
+              <p>{client.clientEmail}</p>
 
-                <p className="text-zinc-400 mt-2">
-                  {client.clientEmail}
-                </p>
-
-                <p className="text-zinc-500 mt-3">
-                  Projects: {client.totalProjects}
-                </p>
-              </div>
-
-              <Link
-                href={`/admin/clients/${client._id}`}
-                className="bg-purple-600 hover:bg-purple-500 px-5 py-3 rounded-xl"
-              >
-                View Projects
-              </Link>
-
+              <p className="mt-2 text-zinc-400">
+                Projects: {client.totalProjects}
+              </p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
-
     </div>
   );
 }

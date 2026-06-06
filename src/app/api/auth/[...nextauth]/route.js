@@ -2,8 +2,6 @@ import { connectMongodb } from "../../../../../lib/mongodb";
 import User from "../../../../../models/user";
 import NextAuth from "next-auth";
 import CredentialsProviders from "next-auth/providers/credentials";
-import { signIn } from "next-auth/react";
-import { Finlandica } from "next/font/google";
 import bcrypt from "bcryptjs";
 
 export const authOptions={
@@ -28,7 +26,7 @@ export const authOptions={
            return user;
           } catch (error) {
              console.log("error:",error);
-             return nulll;
+             return null;
           }
         }
     })

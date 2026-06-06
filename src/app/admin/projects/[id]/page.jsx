@@ -1,59 +1,52 @@
 "use client";
 
-import { useState } from "react";
+import {
+  useEffect,
+  useState,
+} from "react";
+
+import { useParams } from "next/navigation";
 
 export default function ProjectPage() {
-  const [project, setProject] = useState({
-    _id: "6a1de47f006277a26e19e5d6",
+  const params = useParams();
 
-    projectTitle: "Anime Intro",
+  const [project, setProject] =
+    useState(null);
 
-    videoUrl: "",
+  const [loading, setLoading] =
+    useState(true);
 
-    tasks: [
-      {
-        title: "Rough Sketch",
-        completed: true,
-      },
-      {
-        title: "Storyboard",
-        completed: true,
-      },
-      {
-        title: "Line Art",
-        completed: false,
-      },
-      {
-        title: "Coloring",
-        completed: false,
-      },
-      {
-        title: "Animation",
-        completed: false,
-      },
-      {
-        title: "Final Render",
-        completed: false,
-      },
-    ],
-  });
+  useEffect(() => {
+    fetchProject();
+  }, []);
 
-  const completedTasks =
-    project.tasks.filter(
-      (task) => task.completed
-    ).length;
+  const fetchProject =
+    async () => {
+      try {
+        const res =
+          await fetch(
+            `/api/projects/${params.id}`
+          );
 
-  const progress = Math.round(
-    (completedTasks /
-      project.tasks.length) *
-      100
-  );
+        const data =
+          await res.json();
+
+        setProject(data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
   const toggleTask = (index) => {
-    const updatedTasks = [...project.tasks];
+    const updatedTasks = [
+      ...project.tasks,
+    ];
 
     updatedTasks[index].completed =
-      !updatedTasks[index].completed;
+      !updatedTasks[index]
+        .completed;
 
     setProject({
       ...project,
@@ -61,15 +54,27 @@ export default function ProjectPage() {
     });
   };
 
-  const handleVideoUpload = async (
-    e
-  ) => {
-    const file =
-      e.target.files?.[0];
+  const completedTasks =
+    project?.tasks?.filter(
+      (task) => task.completed
+    ).length || 0;
 
-    if (!file) return;
+  const progress =
+    project?.tasks?.length
+      ? Math.round(
+          (completedTasks /
+            project.tasks.length) *
+            100
+        )
+      : 0;
 
-    try {
+  const handleVideoUpload =
+    async (e) => {
+      const file =
+        e.target.files[0];
+
+      if (!file) return;
+
       const formData =
         new FormData();
 
@@ -79,9 +84,10 @@ export default function ProjectPage() {
       );
 
       formData.append(
-  "upload_preset",
-  "toonlance_videos"
-);
+        "upload_preset",
+        "toonlance_videos"
+      );
+
       const response =
         await fetch(
           "https://api.cloudinary.com/v1_1/dqxenh8mh/video/upload",
@@ -93,56 +99,83 @@ export default function ProjectPage() {
 
       const data =
         await response.json();
+        console.log("CLOUDINARY DATA:", data);
+        setProject((prev) => {
+  console.log(
+    "SETTING URL:",
+    data.secure_url
+  );
+
+  return {
+    ...prev,
+    videoUrl: data.secure_url,
+  };
+});
 
       setProject((prev) => ({
         ...prev,
         videoUrl:
           data.secure_url,
       }));
-    } catch (error) {
-      console.error(error);
-      alert(
-        "Video upload failed"
-      );
-    }
-  };
-
-  const saveProject =
-    async () => {
-      try {
-        console.log(project._id);
-        await fetch(
-          `/api/projects/${project._id}`,
-          {
-            method: "PATCH",
-
-            headers: {
-              "Content-Type":
-                "application/json",
-            },
-
-            body: JSON.stringify({
-              tasks:
-                project.tasks,
-
-              videoUrl:
-                project.videoUrl,
-            }),
-          }
-        );
-
-        alert(
-          "Project Updated Successfully"
-        );
-      } catch (error) {
-        console.error(error);
-      }
     };
+console.log("VIDEO URL BEFORE SAVE:");
+// console.log(project.videoUrl);
+  const saveProject = async () => {
+  try {
+    console.log("PROJECT ID:", project._id);
+    console.log(
+  "VIDEO URL BEFORE SAVE:",
+  project.videoUrl
+);
+    const res = await fetch(
+      `/api/projects/${project._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type":
+            "application/json",
+        },
+        body: JSON.stringify({
+          tasks: project.tasks,
+          videoUrl: project.videoUrl,
+        }),
+      }
+    );
+
+    console.log("STATUS:", res.status);
+
+    const data = await res.json();
+
+    console.log("RESPONSE:", data);
+
+    setProject(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+  if (loading) {
+    return (
+      <div className="p-10">
+        Loading...
+      </div>
+    );
+  }
+
+  if (!project) {
+    return (
+      <div className="p-10">
+        Project Not Found
+      </div>
+    );
+  }
+  console.log("PROJECT:", project);
 
   return (
     <div className="max-w-7xl mx-auto p-8">
 
       <div className="flex justify-between items-center mb-10">
+
         <div>
           <h1 className="text-4xl font-bold">
             {
@@ -151,9 +184,15 @@ export default function ProjectPage() {
           </h1>
 
           <p className="text-zinc-400 mt-2">
-            Manage project
-            progress and
-            preview videos
+            {
+              project.clientName
+            }
+          </p>
+
+          <p className="text-zinc-500">
+            {
+              project.clientEmail
+            }
           </p>
         </div>
 
@@ -161,18 +200,19 @@ export default function ProjectPage() {
           onClick={
             saveProject
           }
-          className="bg-purple-600 hover:bg-purple-500 px-6 py-3 rounded-xl text-white"
+          className="bg-purple-600 px-5 py-3 rounded-xl"
         >
           Save Changes
         </button>
+
       </div>
 
       {/* Progress */}
 
-      <div className="bg-zinc-900 rounded-3xl p-6 mb-8 border border-zinc-800">
+      <div className="bg-zinc-900 p-6 rounded-3xl mb-8">
 
         <div className="flex justify-between mb-3">
-          <span className="font-medium">
+          <span>
             Progress
           </span>
 
@@ -184,7 +224,7 @@ export default function ProjectPage() {
         <div className="h-4 bg-zinc-800 rounded-full overflow-hidden">
 
           <div
-            className="h-full bg-purple-500 transition-all duration-300"
+            className="h-full bg-purple-500"
             style={{
               width: `${progress}%`,
             }}
@@ -198,73 +238,52 @@ export default function ProjectPage() {
 
         {/* Checklist */}
 
-        <div className="bg-zinc-900 rounded-3xl p-6 border border-zinc-800">
+        <div className="bg-zinc-900 p-6 rounded-3xl">
 
-          <h2 className="text-2xl font-semibold mb-6">
-            Production
-            Stages
+          <h2 className="text-2xl mb-6">
+            Production Stages
           </h2>
 
           <div className="space-y-4">
 
-            {project.tasks.map(
-              (
-                task,
-                index
-              ) => (
-                <div
-                  key={
-                    task.title
-                  }
-                  className="flex items-center gap-4"
-                >
-                  <input
-                    type="checkbox"
-                    checked={
-                      task.completed
-                    }
-                    onChange={() =>
-                      toggleTask(
-                        index
-                      )
-                    }
-                    className="w-5 h-5 cursor-pointer"
-                  />
+            {project?.tasks?.map((task, index) => (
+  <div
+    key={task._id || task.title}
+    className="flex items-center gap-3"
+  >
+    <input
+      type="checkbox"
+      checked={task.completed}
+      onChange={() => toggleTask(index)}
+    />
 
-                  <span>
-                    {
-                      task.title
-                    }
-                  </span>
-                </div>
-              )
-            )}
+    <span>{task.title}</span>
+  </div>
+))}
 
           </div>
 
         </div>
 
-        {/* Video Upload */}
+        {/* Video */}
 
-        <div className="bg-zinc-900 rounded-3xl p-6 border border-zinc-800">
+        <div className="bg-zinc-900 p-6 rounded-3xl">
 
-          <h2 className="text-2xl font-semibold mb-6">
-            Preview
-            Video
+          <h2 className="text-2xl mb-6">
+            Preview Video
           </h2>
 
           {project.videoUrl ? (
             <video
               controls
-              className="w-full rounded-xl mb-4"
+              className="w-full rounded-xl mb-5"
               src={
                 project.videoUrl
               }
             />
           ) : (
-            <div className="h-64 rounded-xl bg-zinc-800 flex items-center justify-center text-zinc-400 mb-4">
-              No Video
-              Uploaded
+            <div className="h-64 bg-zinc-800 rounded-xl flex items-center justify-center mb-5">
+              No Video Uploaded
             </div>
           )}
 
@@ -274,7 +293,6 @@ export default function ProjectPage() {
             onChange={
               handleVideoUpload
             }
-            className="block w-full text-sm"
           />
 
         </div>
