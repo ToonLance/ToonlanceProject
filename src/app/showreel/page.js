@@ -5,69 +5,53 @@ import gsap from "gsap";
 
 const page = () => {
 
-  const headingRef = useRef(null);
-  const videosRef = useRef([]);
 
-  useEffect(() => {
-
-    
-    gsap.set([headingRef.current, videosRef.current], {
-      opacity: 1,
-      filter: "blur(0px)",
-      y: 0
-    });
-
-    
-    const tl = gsap.timeline();
-
-    tl.from(headingRef.current, {
-      opacity: 0,
-      y: -50,
-      filter: "blur(10px)",
-      duration: 1,
-      ease: "power3.out"
-    });
-
-    
-    tl.from(videosRef.current, {
-      opacity: 0,
-      y: 50,
-      filter: "blur(15px)",
-      duration: 1,
-      stagger: 0.3,
-      ease: "power3.out"
-    }, "-=0.5");
-
-    
-    return () => {
-      tl.kill();
-    };
-
-  }, []);
 
   return (
     <div>
 
-      <div className='heading' ref={headingRef}>
-        <h1 className='text-4xl lg:text-9xl mt-14 text-center'>SHOWREEL</h1>
-      </div>
 
-      <div className='flex gap-6 align-bottom justify-center mt-12 flex-wrap'>
+      <section 
+    
+        className="min-h-screen flex flex-col items-center justify-center px-8 md:px-20"
+      >
+        <div className="max-w-6xl w-full text-center mb-16">
+          <p className="uppercase tracking-[0.4em] text-neutral-500 text-sm mb-6">
+            Featured
+          </p>
 
-        <video ref={el => videosRef.current[0] = el} width="400" autoPlay muted loop className='aspect-video rounded-lg'>
-          <source src="s2.mp4" type="video/mp4" />
-        </video>
+          <h2 
+           
+            className="text-5xl md:text-7xl font-light mb-8"
+          >
+            Studio
+            <span className="font-semibold"> Showreel</span>
+          </h2>
 
-        <video ref={el => videosRef.current[1] = el} width="400" autoPlay muted loop className='aspect-video rounded-lg'>
-          <source src="Toonlance_Showreel.mp4" type="video/mp4" />
-        </video>
+          <div className="w-24 h-px bg-white mx-auto mb-8"></div>
 
-        <video ref={el => videosRef.current[2] = el} width="400" autoPlay muted loop className='aspect-video rounded-lg'>
-          <source src="showreel.mp4" type="video/mp4" />
-        </video>
+          <p className="max-w-2xl mx-auto text-neutral-400 text-lg leading-relaxed">
+            A curated collection of our finest animation, storytelling,
+            motion design and visual experiences brought together
+            in one cinematic reel.
+          </p>
+        </div>
 
-      </div>
+        <div 
+      
+          className="w-full max-w-6xl rounded-3xl overflow-hidden border border-white/10"
+        >
+          <iframe
+            className="w-full aspect-video"
+            src="https://www.youtube.com/embed/YOUR_SHOWREEL_VIDEO_ID"
+            title="Studio Showreel"
+            allowFullScreen
+          />
+        </div>
 
+        <div className="mt-10 text-neutral-500 text-sm tracking-[0.25em] uppercase">
+        </div>
+      </section>
     </div>
   )
 }
