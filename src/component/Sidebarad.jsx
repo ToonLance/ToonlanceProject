@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 export default function Sidebar() {
   const links = [
@@ -25,6 +27,7 @@ export default function Sidebar() {
             {link.name}
           </Link>
         ))}
+         <button  onClick={()=>signOut()}  className="bg-red-400 font-bold text-white px-6 py-2 mt-3 ">Log out</button>
       </nav>
     </aside>
   );

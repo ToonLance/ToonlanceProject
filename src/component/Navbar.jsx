@@ -3,9 +3,15 @@
 import { fetchApi } from "@/app/api/api";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+   const { data: session } = useSession();
+
+  const isAdmin =
+    session?.user?.email === "a@gmail.com";
+
 
   useEffect(() => {
     fetchApi();
@@ -24,7 +30,11 @@ const Navbar = () => {
         <div className="hidden md:flex gap-10 items-center">
           <Link href="/">Home</Link>
            <Link href="/dashboard">Dashboard</Link>
-             <Link href="/admin">Admin</Link>
+           {isAdmin && (
+        <Link href="/admin">
+          Admin 
+        </Link>
+      )}
           <Link href="/showreel">Showreel</Link>
           <Link href="/pricing">Pricing</Link>
           <Link href="/testimonials">Testimonials</Link>
@@ -58,7 +68,11 @@ const Navbar = () => {
         <div className="flex flex-col gap-5 mt-6 md:hidden">
           <Link href="/">Home</Link>
           <Link href="/dashboard">Dashboard</Link>
-             <Link href="/admin">Admin</Link>
+  {isAdmin && (
+        <Link href="/admin">
+          Admin 
+        </Link>
+      )}
           <Link href="/showreel">Showreel</Link>
           <Link href="/pricing">Pricing</Link>
           <Link href="/testimonials">Testimonials</Link>

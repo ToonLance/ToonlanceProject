@@ -1,6 +1,7 @@
 "use client";
 
 import Navbar from "../component/Navbar";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -703,13 +704,13 @@ export default function Page() {
           <div className="w-16 h-px bg-white/30 mx-auto mb-6"></div>
 
           <p className="text-center text-neutral-500 text-sm md:text-base tracking-[0.2em] uppercase">
-            This Website Is Created By
-            <span className="text-white"> Chirag </span>
+            Developed By
+            
+           <Link href={"https://www.linkedin.com/in/chirag-agrawal-936635329?utm_source=share_via&utm_content=profile&utm_medium=member_ios"}><span className="text-white" > Chirag Agrawal </span></Link>
             And
-            <span className="text-white"> Kartik </span>
-            Collaboration
+            <span className="text-white"> Kartik Mishra </span>
           </p>
-
+         <p className="text-center ">© 2026 TOONLANCE — Human-made animation.</p>
         </div>
       </footer>
     </div>

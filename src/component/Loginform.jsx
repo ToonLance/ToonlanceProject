@@ -4,6 +4,11 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+
+
+
+
 
 
 
@@ -13,7 +18,9 @@ export default function Loginform(){
     const[password,Setpassword]=useState("");
     const[error,Seterror]=useState("");
    const router=useRouter();
-
+   const searchParams = useSearchParams();
+    const callbackUrl =
+  searchParams.get("callbackUrl") || "/";
     const handelsubmit= async (e)=>{
       e.preventDefault();
 
@@ -25,7 +32,7 @@ export default function Loginform(){
            Seterror("invalid credentials");
            return
         }
-      router.replace("showreel");
+      router.replace(callbackUrl);
     } catch (error) {
         console.log(error);
     }

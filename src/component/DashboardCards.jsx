@@ -8,14 +8,6 @@ export default function DashboardCards() {
       title: "Clients",
       value: "12",
     },
-    {
-      title: "Reviews",
-      value: "4",
-    },
-    {
-      title: "Revenue",
-      value: "₹1.2L",
-    },
   ];
 
   return (
