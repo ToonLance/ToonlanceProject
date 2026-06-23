@@ -6,10 +6,11 @@ import {
 } from "react";
 
 import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function ProjectPage() {
   const params = useParams();
-
+  const router = useRouter();
   const [project, setProject] =
     useState(null);
 
@@ -120,6 +121,44 @@ export default function ProjectPage() {
     };
 console.log("VIDEO URL BEFORE SAVE:");
 // console.log(project.videoUrl);
+const deleteProject =
+  async () => {
+
+    const confirmDelete =
+      confirm(
+        "Are you sure?"
+      );
+
+    if (!confirmDelete)
+      return;
+
+    try {
+      const res =
+        await fetch(
+          `/api/projects/${project._id}`,
+          {
+            method:
+              "DELETE",
+          }
+        );
+
+      const data =
+        await res.json();
+
+
+      router.push(
+        "/admin/clients"
+      );
+ 
+      // alert(data.message);
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
   const saveProject = async () => {
   try {
     console.log("PROJECT ID:", project._id);
@@ -149,6 +188,9 @@ console.log("VIDEO URL BEFORE SAVE:");
     console.log("RESPONSE:", data);
 
     setProject(data);
+    if(res.ok){
+      alert("saved changes!!");
+    }
   } catch (error) {
     console.log(error);
   }
@@ -195,7 +237,7 @@ console.log("VIDEO URL BEFORE SAVE:");
             }
           </p>
         </div>
-
+         
         <button
           onClick={
             saveProject
@@ -204,7 +246,7 @@ console.log("VIDEO URL BEFORE SAVE:");
         >
           Save Changes
         </button>
-
+   
       </div>
 
       {/* Progress */}
@@ -298,7 +340,14 @@ console.log("VIDEO URL BEFORE SAVE:");
         </div>
 
       </div>
-
+      <div className="flex justify-center items-center ">
+            <button
+    onClick={deleteProject}
+    className="bg-red-600 px-50 py-3  rounded-xl mt-6"
+  >
+    Delete Project
+  </button>
+  </div>
     </div>
   );
 }

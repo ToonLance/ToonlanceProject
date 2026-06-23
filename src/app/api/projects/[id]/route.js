@@ -78,3 +78,30 @@ export async function PATCH(
     );
   }
 }
+export async function DELETE(
+  req,
+  { params }
+) {
+  try {
+    await connectMongodb();
+
+    const { id } = await params;
+
+    await Project.findByIdAndDelete(id);
+
+    return NextResponse.json({
+      message:
+        "Project Deleted Successfully",
+    });
+  } catch (error) {
+    return NextResponse.json(
+      {
+        message:
+          error.message,
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+}

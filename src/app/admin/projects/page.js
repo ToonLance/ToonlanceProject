@@ -21,8 +21,7 @@ export default function CreateProjectPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log(formData);
+     // console.log(formData);
  
 const response = await fetch(
   "/api/projects",
@@ -39,11 +38,13 @@ const response = await fetch(
 );
 
 const data = await response.json();
-
 console.log(data);
 
-    // API Call Here
-    // await fetch("/api/projects", {...})
+if (response.ok) {
+  alert("Project Created Successfully");
+} else {
+  alert(data.message || "Failed to create project");
+}
   };
 
   return (
@@ -72,6 +73,7 @@ console.log(data);
                 value={formData.clientName}
                 onChange={handleChange}
                 className="p-4 rounded-xl bg-zinc-800 text-white"
+                  required
               />
 
               <input
@@ -81,6 +83,7 @@ console.log(data);
                 value={formData.clientEmail}
                 onChange={handleChange}
                 className="p-4 rounded-xl bg-zinc-800 text-white"
+                  required
               />
               <input
                 type="number"
@@ -108,6 +111,7 @@ console.log(data);
                 value={formData.projectTitle}
                 onChange={handleChange}
                 className="p-4 rounded-xl bg-zinc-800 text-white"
+                  required
               />
             </div>
           </div>

@@ -22,7 +22,6 @@ export default  async function DashboardPage() {
       </h1>
 
       <DashboardCards/>
-       {/* <button  onClick={()=>signOut()}  className="bg-red-400 font-bold text-white px-6 py-2 mt-3 ">Log out</button> */}
     </div>
   );
 }
