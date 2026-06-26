@@ -16,7 +16,7 @@ export default  async function DashboardPage() {
     redirect("/");
   } 
   return (
-    <div>
+    <div className="mt-20">
       <h1 className="text-4xl font-bold mb-8">
         Dashboard
       </h1>

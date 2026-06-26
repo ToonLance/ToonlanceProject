@@ -11,7 +11,7 @@ export default function Sidebar() {
 
   return (
     <aside className="w-72 bg-zinc-900 border-r border-zinc-800">
-      <div className="p-6">
+      <div className="p-6 mt-15">
         <h1 className="text-3xl font-bold">
             Karthik-Toonlance
         </h1>

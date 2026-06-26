@@ -312,7 +312,7 @@ export default function DashboardPage() {
 }
 
   return (
-    <div className="max-w-7xl mx-auto p-8">
+    <div className="max-w-7xl mx-auto p-8 mt-20">
 
       <h1 className="text-4xl font-bold mb-10">
         My Projects

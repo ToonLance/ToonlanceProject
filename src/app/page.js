@@ -181,6 +181,7 @@ export default function Page() {
 
   return (
     <div className="bg-black text-white">
+      <section id="hero" className="scroll-section scroll-mt-28">
       <video
         ref={videoRef}
         autoPlay
@@ -199,7 +200,7 @@ export default function Page() {
           keyboard_double_arrow_up
         </span>
       </div>
-
+ </section>
       <section 
         ref={el => sectionRefs.current[0] = el}
         className="min-h-screen flex flex-col lg:flex-row items-center justify-between px-8 md:px-20 lg:px-32 gap-16 bg-black"
@@ -242,9 +243,9 @@ export default function Page() {
         </div>
       </section>
 
-      <section 
+      <section id="showreel"
         ref={el => sectionRefs.current[1] = el}
-        className="min-h-screen flex flex-col items-center justify-center px-8 md:px-20"
+        className="min-h-screen flex flex-col items-center justify-center px-8 md:px-20 scroll-section scroll-mt-28"
       >
         <div className="max-w-6xl w-full text-center mb-16">
           <p className="uppercase tracking-[0.4em] text-neutral-500 text-sm mb-6">
@@ -284,9 +285,9 @@ export default function Page() {
         </div>
       </section>
 
-      <section 
+      <section id="pricing"
         ref={el => sectionRefs.current[2] = el}
-        className="min-h-screen flex items-center justify-center px-8 md:px-20 bg-black"
+        className="min-h-screen flex items-center justify-center px-8 md:px-20 bg-black scroll-section scroll-mt-28"
       >
         <div className="max-w-5xl w-full">
 
@@ -358,9 +359,9 @@ export default function Page() {
         </div>
       </section>
 
-      <section 
+      <section id="testimonial"
         ref={el => sectionRefs.current[3] = el}
-        className="py-32 px-8 md:px-20 bg-black"
+        className="py-32 px-8 md:px-20 bg-black scroll-section scroll-mt-28"
       >
         <div className="max-w-7xl mx-auto">
 
@@ -440,10 +441,10 @@ export default function Page() {
         </div>
       </section>
 
-      <section
+      <section 
         ref={el => sectionRefs.current[4] = el}
         id="contact"
-        className="min-h-screen bg-black text-white py-32 px-5"
+        className="min-h-screen bg-black text-white py-32 px-5 scroll-section scroll-mt-28"
       >
         <div className="max-w-7xl mx-auto">
 
@@ -706,7 +707,7 @@ export default function Page() {
           <p className="text-center text-neutral-500 text-sm md:text-base tracking-[0.2em] uppercase">
             Developed By
             
-           <Link href={"https://www.linkedin.com/in/chirag-agrawal-936635329?utm_source=share_via&utm_content=profile&utm_medium=member_ios"}><span className="text-white" > Chirag Agrawal </span></Link>
+           <Link href={"https://www.linkedin.com/in/chirag-agrawal-936635329"}><span className="text-white" > Chirag Agrawal </span></Link>
             And
             <span className="text-white"> Kartik Mishra </span>
           </p>

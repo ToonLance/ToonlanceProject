@@ -214,7 +214,7 @@ const deleteProject =
   console.log("PROJECT:", project);
 
   return (
-    <div className="max-w-7xl mx-auto p-8">
+    <div className="max-w-7xl mx-auto p-8 mt-10">
 
       <div className="flex justify-between items-center mb-10">
 

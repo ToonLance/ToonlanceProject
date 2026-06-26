@@ -18,7 +18,7 @@ export default function ClientsPage() {
   };
 
   return (
-    <div className="p-8">
+    <div className="p-8 mt-20">
       <h1 className="text-4xl font-bold mb-8">
         Clients
       </h1>

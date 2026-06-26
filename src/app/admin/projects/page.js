@@ -48,7 +48,7 @@ if (response.ok) {
   };
 
   return (
-    <div className="max-w-5xl mx-auto py-10 px-4">
+    <div className="max-w-5xl mx-auto py-10 px-4 mt-20">
       <div className="bg-zinc-900 rounded-3xl p-8 border border-zinc-800">
 
         <h1 className="text-4xl font-bold text-white mb-8">
