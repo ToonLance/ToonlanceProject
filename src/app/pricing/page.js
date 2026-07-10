@@ -2,16 +2,13 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div>      <section 
+    <div className='mt-25'>      <section 
 
         className="min-h-screen flex items-center justify-center px-8 md:px-20 bg-black"
       >
         <div className="max-w-5xl w-full">
 
           <div className="text-center mb-16">
-            <p className="uppercase tracking-[0.4em] text-neutral-500 text-sm mb-6">
-              Pricing
-            </p>
 
             <h2 
 

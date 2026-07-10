@@ -76,7 +76,7 @@ export default function Page() {
           <div className="border border-white/10 rounded-3xl overflow-hidden backdrop-blur-sm">
             <iframe
               className="w-full aspect-video"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              src="https://www.youtube.com/embed/v4BhEqm7vLs?si=WWjMo110sgajVFn5"
               title="Latest Work"
               allowFullScreen
             />
@@ -110,7 +110,7 @@ export default function Page() {
         <div className="w-full max-w-6xl rounded-3xl overflow-hidden border border-white/10">
           <iframe
             className="w-full aspect-video"
-            src="https://www.youtube.com/embed/YOUR_SHOWREEL_VIDEO_ID"
+            src="https://www.youtube.com/embed/g9_xTpoorP0?si=i_MNDubfknKU40jh"
             title="Studio Showreel"
             allowFullScreen
           />
@@ -184,7 +184,7 @@ export default function Page() {
 
       <section
         id="testimonial"
-        className="py-32 px-8 md:px-20 bg-black scroll-section scroll-mt-28"
+        className="py-32 px-8 md:px-20 bg-black scroll-section scroll-mt-28 -mt-20"
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
@@ -260,7 +260,7 @@ export default function Page() {
 
       <section
         id="contact"
-        className="min-h-screen bg-black text-white py-32 px-5 scroll-section scroll-mt-28"
+        className="min-h-screen bg-black text-white py-32 px-5 scroll-section scroll-mt-28 -mt-45"
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
@@ -475,7 +475,7 @@ export default function Page() {
             </form>
           </div>
 
-          <div className="text-center mt-24">
+          <div className="text-center mt-40 -mb-10">
             <h3 className="text-3xl md:text-5xl font-light mb-6">
               Ready To Bring Your Story To Life?
             </h3>
@@ -489,20 +489,7 @@ export default function Page() {
         </div>
       </section>
 
-      <footer className="border-t border-white/10 py-12 bg-black">
-        <div className="max-w-7xl mx-auto">
-          <div className="w-16 h-px bg-white/30 mx-auto mb-6"></div>
-
-          <p className="text-center text-neutral-500 text-sm md:text-base tracking-[0.2em] uppercase">
-            Developed By
-            
-            <Link href={"https://www.linkedin.com/in/chirag-agrawal-936635329"}><span className="text-white" > Chirag Agrawal </span></Link>
-            And
-            <span className="text-white"> Kartik Mishra </span>
-          </p>
-          <p className="text-center ">© 2026 TOONLANCE — Human-made animation.</p>
-        </div>
-      </footer>
+     
     </div>
   );
 }

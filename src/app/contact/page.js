@@ -31,7 +31,7 @@ const page = () => {
   };
 
   return (
-    <div>
+    <div className="mt-10">
       <section
         id="contact"
         className="bg-black text-white py-20 px-5"

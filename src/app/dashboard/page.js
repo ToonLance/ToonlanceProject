@@ -296,109 +296,122 @@ export default function DashboardPage() {
         </div>
       </section>
     </div>
-        <div className="grid place-items-center h-screen "> 
-        <div className="shadow-lg p-8  bg-zinc-300/10 flex flex-col gap-2 my-6">
-         <div>
-            Name: <span className="font-bold">{session?.user?.name}</span>
-         </div>
-         <div>
-            Email: <span className="font-bold">{session?.user?.email}</span>
-         </div>
-         <button  onClick={()=>signOut()}  className="bg-red-400 font-bold text-white px-6 py-2 mt-3 ">Log out</button>
-        </div>
-        </div>
     </div>
   );
 }
 
   return (
-    <div className="max-w-7xl mx-auto p-8 mt-20">
+  <div className="max-w-7xl mx-auto px-6 py-12 mt-20">
 
-      <h1 className="text-4xl font-bold mb-10">
+    <div className="mb-12">
+      <h1 className="text-5xl font-bold">
         My Projects
       </h1>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <p className="text-zinc-400 mt-3 text-lg">
+        Track the progress of your animation projects.
+      </p>
+    </div>
 
-        {projects.map(
-          (project) => {
-            const completed =
-              project.tasks.filter(
-                (
-                  task
-                ) =>
-                  task.completed
-              ).length;
+    {projects.length === 0 ? (
+      <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-16 text-center">
+        <h2 className="text-3xl font-semibold mb-4">
+          No Projects Yet
+        </h2>
 
-            const progress =
-              Math.round(
-                (completed /
-                  project
-                    .tasks
-                    .length) *
-                  100
-              );
+        <p className="text-zinc-500">
+          Your projects will appear here once the admin creates one.
+        </p>
+      </div>
+    ) : (
 
-            return (
-              <div
-                key={
-                  project._id
-                }
-                className="bg-zinc-900 rounded-3xl p-6 border border-zinc-800"
-              >
-                <h2 className="text-2xl font-semibold mb-4">
-                  {
-                    project.projectTitle
-                  }
-                </h2>
+      <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
 
-                <div className="flex justify-between mb-2">
-                  <span>
-                    Progress
-                  </span>
+        {projects.map((project) => {
 
-                  <span>
-                    {
-                      progress
-                    }
-                    %
-                  </span>
+          const completed =
+            project.tasks.filter(
+              (task) => task.completed
+            ).length;
+
+          const progress = Math.round(
+            (completed / project.tasks.length) * 100
+          );
+
+          return (
+
+            <div
+              key={project._id}
+              className="group bg-zinc-900 border border-zinc-800 rounded-3xl p-7 hover:border-purple-500 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(168,85,247,.2)] transition-all duration-300"
+            >
+
+              <div className="flex justify-between items-start">
+
+                <div>
+
+                  <h2 className="text-2xl font-semibold mb-2">
+                    {project.projectTitle}
+                  </h2>
+
+                  <p className="text-zinc-500 text-sm">
+                    {completed} of {project.tasks.length} tasks completed
+                  </p>
+
                 </div>
 
-                <div className="h-3 bg-zinc-800 rounded-full overflow-hidden mb-5">
+                <div className="bg-purple-600/20 text-purple-400 px-4 py-2 rounded-full text-sm font-semibold">
+                  {progress}%
+                </div>
+
+              </div>
+
+              <div className="mt-8">
+
+                <div className="h-3 rounded-full bg-zinc-800 overflow-hidden">
+
                   <div
-                    className="h-full bg-purple-500"
+                    className="h-full rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 transition-all duration-500"
                     style={{
                       width: `${progress}%`,
                     }}
                   />
+
                 </div>
 
-                <Link
-                  href={`/dashboard/project/${project._id}`}
-                  className="inline-block bg-purple-600 px-5 py-3 rounded-xl"
-                >
-                  View Project
-                </Link>
               </div>
-            );
-          }
-        )}
+
+              <div className="mt-8 space-y-3">
+
+                <div className="flex justify-between text-zinc-400">
+
+                  <span>Owner</span>
+
+                  <span>{project.clientName}</span>
+
+                </div>
+
+  
+
+              </div>
+
+              <Link
+                href={`/dashboard/project/${project._id}`}
+                className="mt-8 w-full flex justify-center items-center rounded-2xl bg-purple-600 hover:bg-purple-700 transition py-4 font-semibold"
+              >
+                View Project →
+              </Link>
+
+            </div>
+
+          );
+
+        })}
 
       </div>
-   <div className="grid place-items-center h-screen"> 
-        <div className="shadow-lg p-8  bg-zinc-300/10 flex flex-col gap-2 my-6">
-         <div>
-            Name: <span className="font-bold">{session?.user?.name}</span>
-         </div>
-         <div>
-            Email: <span className="font-bold">{session?.user?.email}</span>
-         </div>
-         <button  onClick={()=>signOut()}  className="bg-red-400 font-bold text-white px-6 py-2 mt-3 ">Log out</button>
-        </div>
-        </div>
-    </div>
-    
-  );
+
+    )}
+
+  </div>
+);
 
 }

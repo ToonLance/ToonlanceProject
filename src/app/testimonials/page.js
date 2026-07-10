@@ -2,16 +2,14 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div>      <section 
+    <div >      <section 
 
         className="py-32 px-8 md:px-20 bg-black"
       >
         <div className="max-w-7xl mx-auto">
 
           <div className="text-center mb-20">
-            <p className="uppercase tracking-[0.4em] text-neutral-500 text-sm mb-6">
-              Testimonials
-            </p>
+          
 
             <h2 
       

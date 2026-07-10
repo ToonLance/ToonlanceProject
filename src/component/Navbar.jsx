@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
 import { motion } from "framer-motion";
 
 export default function Navbar() {
   const pathname = usePathname();
-
+   const { data: session } = useSession();
+   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] =
 useState("home");
@@ -48,7 +50,6 @@ useState("home");
         });
 
         setActive(current);
-
     };
 
     window.addEventListener(
@@ -64,6 +65,23 @@ useState("home");
     );
 
 },[pathname]);
+
+useEffect(() => {
+  const handleClickOutside = () => {
+    setOpen(false);
+  };
+
+  if (open) {
+    document.addEventListener("click", handleClickOutside);
+  }
+
+  return () => {
+    document.removeEventListener("click", handleClickOutside);
+  };
+}, [open]);
+
+
+
   const navLinks = [
   {
     title: "Home",
@@ -89,11 +107,6 @@ useState("home");
     title: "Contact",
     href: "/#contact",
     id: "contact",
-  },
-  {
-    title: "Dashboard",
-    href: "/dashboard",
-    id: "dashboard",
   },
 ];
 
@@ -152,27 +165,110 @@ useState("home");
 
       {/* Right Buttons */}
 
-      <div className="hidden lg:flex items-center gap-4">
+    <div className="hidden lg:flex items-center gap-4">
 
-        <Link
-          href="/login"
-          className={`px-5 py-2 rounded-full transition ${
-            pathname === "/login"
-              ? "text-purple-500"
-              : "hover:text-purple-400"
-          }`}
-        >
-          Login
-        </Link>
+  {session ? (
 
-        <Link
-          href="/register"
-          className="bg-purple-600 hover:bg-purple-700 transition px-6 py-3 rounded-full font-semibold rounded-full hover:scale-105"
-        >
-          Get Started
-        </Link>
+   <div
+  className="relative"
+  onClick={(e) => e.stopPropagation()}
+>
 
-      </div>
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-11 h-11 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center hover:scale-105 transition"
+      >
+
+        {session.user?.image ? (
+
+          <img
+            src={session.user.image}
+            alt="Profile"
+            className="w-full h-full rounded-full object-cover"
+          />
+
+        ) : (
+
+          <span>
+            {(
+              session.user?.name?.[0] ||
+              session.user?.email?.[0] ||
+              "U"
+            ).toUpperCase()}
+          </span>
+
+        )}
+
+      </button>
+
+      {open && (
+
+        <div className="absolute right-0 mt-3 w-64 rounded-2xl bg-zinc-900 border border-white/10 shadow-2xl overflow-hidden">
+
+          <div className="p-4 border-b border-white/10">
+
+            <p className="font-semibold">
+              {session.user?.name || "User"}
+            </p>
+
+            <p className="text-sm text-zinc-400">
+              {session.user?.email}
+            </p>
+
+          </div>
+
+          <Link
+            href={
+              session.user?.email === "a@gmail.com"
+                ? "/admin"
+                : "/dashboard"
+            }
+            className="block px-4 py-3 hover:bg-zinc-800 transition"
+            onClick={() => setOpen(false)}
+          >
+            Dashboard
+          </Link>
+
+          <button
+            onClick={() => signOut()}
+            className="w-full text-left px-4 py-3 text-red-400 hover:bg-zinc-800 transition"
+          >
+            Logout
+          </button>
+
+        </div>
+
+      )}
+
+    </div>
+
+  ) : (
+
+    <>
+
+      <Link
+        href="/login"
+        className={`px-5 py-2 rounded-full transition ${
+          pathname === "/login"
+            ? "text-purple-500"
+            : "hover:text-purple-400"
+        }`}
+      >
+        Login
+      </Link>
+
+      <Link
+        href="/register"
+        className="bg-purple-600 hover:bg-purple-700 transition px-6 py-3 rounded-full font-semibold hover:scale-105"
+      >
+        Get Started
+      </Link>
+
+    </>
+
+  )}
+
+</div>
 
     </div>
   </motion.header>

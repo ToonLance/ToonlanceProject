@@ -8,17 +8,12 @@ const page = () => {
 
 
   return (
-    <div>
-
-
+    <div className='mt-25'>
       <section 
     
         className="min-h-screen flex flex-col items-center justify-center px-8 md:px-20"
       >
         <div className="max-w-6xl w-full text-center mb-16">
-          <p className="uppercase tracking-[0.4em] text-neutral-500 text-sm mb-6">
-            Featured
-          </p>
 
           <h2 
            
@@ -43,7 +38,7 @@ const page = () => {
         >
           <iframe
             className="w-full aspect-video"
-            src="https://www.youtube.com/embed/YOUR_SHOWREEL_VIDEO_ID"
+            src="https://www.youtube.com/embed/g9_xTpoorP0?si=-cFR0-dkuLbqLxhe"
             title="Studio Showreel"
             allowFullScreen
           />
