@@ -2,22 +2,29 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import ApiLoader from "@/component/ApiLoader";
 
 export default function ProjectPage() {
   const params = useParams();
 
   const [project, setProject] = useState(null);
-
+ const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetchProject();
   }, []);
 
   const fetchProject = async () => {
+    try {
     const res = await fetch(`/api/projects/${params.id}`);
     const data = await res.json();
     setProject(data);
+  } finally {
+    setLoading(false);
+  }
   };
-
+ if (loading) {
+  return <ApiLoader />;
+}
   if (!project) {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center text-2xl">

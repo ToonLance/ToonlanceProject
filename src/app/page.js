@@ -1,9 +1,29 @@
 "use client";
-
-import Navbar from "../component/Navbar";
-import Link from "next/link";
+import Loader from "@/component/Loader";
+import { useState, useEffect } from "react";
 
 export default function Page() {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const hasVisited = sessionStorage.getItem("toonlance-loader");
+
+    if (hasVisited) {
+      setLoading(false);
+      return;
+    }
+
+    sessionStorage.setItem("toonlance-loader", "true");
+
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2200);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
 

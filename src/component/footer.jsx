@@ -64,35 +64,35 @@ export default function Footer() {
             <div className="flex flex-col gap-4 text-zinc-400">
 
               <Link
-                href="/#hero"
+                href="/"
                 className="hover:text-purple-400 transition"
               >
                 Home
               </Link>
 
               <Link
-                href="/#showreel"
+                href="/showreel"
                 className="hover:text-purple-400 transition"
               >
                 Showreel
               </Link>
 
               <Link
-                href="/#pricing"
+                href="/pricing"
                 className="hover:text-purple-400 transition"
               >
                 Pricing
               </Link>
 
               <Link
-                href="/#testimonial"
+                href="/testimonials"
                 className="hover:text-purple-400 transition"
               >
                 Testimonials
               </Link>
 
               <Link
-                href="/#contact"
+                href="/contact"
                 className="hover:text-purple-400 transition"
               >
                 Contact
