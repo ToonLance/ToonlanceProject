@@ -63,21 +63,20 @@ export default function Page() {
         >
           <source src="/trans.mp4" type="video/mp4" />
         </video>
-
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 text-white">
-          <span className="material-symbols-outlined text-5xl drop-shadow-lg cp">
+<div className="absolute bottom-5 md:bottom-6 left-1/2 -translate-x-1/2 z-50 text-white">
+          <span className="material-symbols-outlined text-4xl md:text-5xltext-5xl drop-shadow-lg cp">
             keyboard_double_arrow_up
           </span>
         </div>
       </section>
 
-      <section className="min-h-screen flex flex-col lg:flex-row items-center justify-between px-8 md:px-20 lg:px-32 gap-16 bg-black">
+      <section className="min-h-[100svh] flex flex-col lg:flex-row items-center justify-between px-5 sm:px-8 md:px-16 lg:px-32 gap-16 bg-black">
         <div className="flex-1 max-w-xl">
           <p className="uppercase tracking-[0.4em] text-neutral-500 text-sm mb-6">
             Showcase
           </p>
 
-          <h2 className="text-5xl md:text-7xl font-light leading-tight mb-8">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-light leading-tight mb-8">
             Latest
             <br />
             <span className="font-semibold">Work</span>
@@ -85,7 +84,7 @@ export default function Page() {
 
           <div className="w-20 h-px bg-white mb-8"></div>
 
-          <p className="text-neutral-400 text-lg leading-relaxed">
+          <p className="text-neutral-400 text-base md:text-lg leading-relaxed">
             A collection of our latest animation projects, visual storytelling,
             and cinematic experiences crafted with precision, creativity, and
             attention to detail.
@@ -106,14 +105,14 @@ export default function Page() {
 
       <section
         id="showreel"
-        className="min-h-screen flex flex-col items-center justify-center px-8 md:px-20 scroll-section scroll-mt-28"
+        className="min-h-[100svh] flex flex-col items-center justify-center px-5 sm:px-8 md:px-20 scroll-section scroll-mt-28"
       >
         <div className="max-w-6xl w-full text-center mb-16">
           <p className="uppercase tracking-[0.4em] text-neutral-500 text-sm mb-6">
             Featured
           </p>
 
-          <h2 className="text-5xl md:text-7xl font-light mb-8">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-light mb-8">
             Studio
             <span className="font-semibold"> Showreel</span>
           </h2>
@@ -142,7 +141,7 @@ export default function Page() {
 
       <section
         id="pricing"
-        className="min-h-screen flex items-center justify-center px-8 md:px-20 bg-black scroll-section scroll-mt-28"
+        className="min-h-[100svh] flex items-center justify-center px-8 md:px-20 bg-black scroll-section scroll-mt-28"
       >
         <div className="max-w-5xl w-full">
           <div className="text-center mb-16">
@@ -150,7 +149,7 @@ export default function Page() {
               Pricing
             </p>
 
-            <h2 className="text-5xl md:text-7xl font-light mb-8">
+            <h2 className="text-5xl sm:text-6xl md:text-8xl font-light mb-8">
               Simple &
               <span className="font-semibold"> Transparent</span>
             </h2>
@@ -163,7 +162,7 @@ export default function Page() {
             </p>
           </div>
 
-          <div className="border border-white/10 rounded-3xl p-10 md:p-16 backdrop-blur-sm">
+          <div className="border border-white/10 rounded-3xl p-6 sm:p-8 md:p-16 backdrop-blur-sm">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
               <div>
                 <h3 className="text-3xl font-light mb-3">
@@ -204,7 +203,7 @@ export default function Page() {
 
       <section
         id="testimonial"
-        className="py-32 px-8 md:px-20 bg-black scroll-section scroll-mt-28 -mt-20"
+        className="py-32 p-6 md:p-8 md:px-20 bg-black scroll-section scroll-mt-28 "
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
@@ -219,7 +218,7 @@ export default function Page() {
 
             <div className="w-24 h-px bg-white mx-auto mb-8"></div>
 
-            <p className="text-neutral-400 max-w-2xl mx-auto text-lg">
+            <p className="text-neutral-400 max-w-2xl mx-auto text-base md:text-lg">
               Feedback from animation studios, production houses and creative teams
               we've collaborated with.
             </p>
@@ -261,7 +260,7 @@ export default function Page() {
                 </p>
 
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center font-semibold text-lg">
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-full border border-white/20 flex items-center justify-center font-semibold text-lg">
                     {testimonial.initials}
                   </div>
 
@@ -280,7 +279,7 @@ export default function Page() {
 
       <section
         id="contact"
-        className="min-h-screen bg-black text-white py-32 px-5 scroll-section scroll-mt-28 -mt-45"
+        className="min-h-screen bg-black text-white py-32 px-5 scroll-section scroll-mt-28 "
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
@@ -303,7 +302,7 @@ export default function Page() {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-10">
-            <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-10">
+            <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-6 sm:p-8 md:p-10">
               <h3 className="text-3xl font-light mb-4">
                 Get In Touch
               </h3>
@@ -318,7 +317,7 @@ export default function Page() {
                     EMAIL
                   </p>
 
-                  <h4 className="text-xl">
+                  <h4 className="text-lg md:text-xl break-all">
                     toonlanceservice@gmail.com
                   </h4>
                 </div>
@@ -355,7 +354,7 @@ export default function Page() {
                   </p>
 
                   <div className="mt-8">
-                    <span className="text-5xl font-semibold">
+                    <span className="text-4xl md:text-5xl font-semibold">
                       $400
                     </span>
 
@@ -382,7 +381,7 @@ export default function Page() {
                     name="name"
                     required
                     placeholder="John Doe"
-                    className="w-full bg-transparent border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-white transition-all"
+                    className="w-full bg-transparent border border-white/10 rounded-2xl px-4 py-3 md:px-5 md:py-4 outline-none focus:border-white transition-all"
                   />
                 </div>
 
@@ -396,7 +395,7 @@ export default function Page() {
                     name="email"
                     required
                     placeholder="john@gmail.com"
-                    className="w-full bg-transparent border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-white transition-all"
+                    className="w-full bg-transparent border border-white/10 rounded-2xl px-4 py-3 md:px-5 md:py-4 outline-none focus:border-white transition-all"
                   />
                 </div>
               </div>
@@ -410,7 +409,7 @@ export default function Page() {
                   type="text"
                   name="discord"
                   placeholder="@username"
-                  className="w-full bg-transparent border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-white transition-all"
+                  className="w-full bg-transparent border border-white/10 rounded-2xl px-4 py-3 md:px-5 md:py-4 outline-none focus:border-white transition-all"
                 />
               </div>
 
@@ -425,7 +424,7 @@ export default function Page() {
                     name="budget"
                     placeholder="$400 - $5000+"
                     required
-                    className="w-full bg-transparent border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-white transition-all"
+                    className="w-full bg-transparent border border-white/10 rounded-2xl px-4 py-3 md:px-5 md:py-4 outline-none focus:border-white transition-all"
                   />
                 </div>
 
@@ -474,7 +473,7 @@ export default function Page() {
 
                 <textarea
                   name="message"
-                  rows={6}
+                  rows={5}
                   required
                   placeholder="Tell us about your project..."
                   className="w-full bg-transparent border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-white transition-all resize-none"
@@ -495,8 +494,8 @@ export default function Page() {
             </form>
           </div>
 
-          <div className="text-center mt-40 -mb-10">
-            <h3 className="text-3xl md:text-5xl font-light mb-6">
+          <div className="text-center mt-24 md:mt-40 mb-0">
+            <h3 className="text-2xl sm:text-3xl md:text-5xl font-light mb-6">
               Ready To Bring Your Story To Life?
             </h3>
 

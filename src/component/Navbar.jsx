@@ -5,15 +5,17 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const pathname = usePathname();
    const { data: session } = useSession();
    const [open, setOpen] = useState(false);
+   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] =
 useState("home");
-
+ 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
@@ -80,7 +82,18 @@ useEffect(() => {
   };
 }, [open]);
 
+useEffect(() => {
+  const handleResize = () => {
+    if (window.innerWidth >= 1024) {
+      setMobileOpen(false);
+    }
+  };
 
+  window.addEventListener("resize", handleResize);
+
+  return () =>
+    window.removeEventListener("resize", handleResize);
+}, []);
 
   const navLinks = [
   {
@@ -122,13 +135,13 @@ useEffect(() => {
         : "bg-transparent"
     }`}
   >
-    <div className="max-w-7xl mx-auto h-20 px-8 flex items-center justify-between">
+  <div className="max-w-7xl mx-auto h-20 px-5 md:px-8 flex items-center justify-between">
 
       {/* Logo */}
 
       <Link
         href="/"
-        className="text-3xl font-bold tracking-wide"
+       className="text-2xl md:text-3xl font-bold tracking-wide"
       >
         Toon<span className="text-purple-500">lance</span>
       </Link>
@@ -162,6 +175,17 @@ useEffect(() => {
         ))}
 
       </nav>
+      {/* Mobile Hamburger */}
+<button
+  onClick={() => setMobileOpen(!mobileOpen)}
+  className="lg:hidden text-white"
+>
+  {mobileOpen ? (
+    <X size={30} />
+  ) : (
+    <Menu size={30} />
+  )}
+</button>
 
       {/* Right Buttons */}
 
@@ -176,7 +200,7 @@ useEffect(() => {
 
       <button
         onClick={() => setOpen(!open)}
-        className="w-11 h-11 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center hover:scale-105 transition"
+        className="w-10 h-10 md:w-11 md:h-11 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center hover:scale-105 transition"
       >
 
         {session.user?.image ? (
@@ -271,6 +295,71 @@ useEffect(() => {
 </div>
 
     </div>
+    {mobileOpen && (
+  <motion.div
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0 }}
+    className="lg:hidden bg-zinc-950 border-t border-white/10"
+  >
+    <div className="flex flex-col px-6 py-6 space-y-5">
+
+      {navLinks.map((item) => (
+        <Link
+          key={item.id}
+          href={item.href}
+          onClick={() => setMobileOpen(false)}
+          className="text-lg hover:text-purple-500"
+        >
+          {item.title}
+        </Link>
+      ))}
+
+      <hr className="border-white/10" />
+
+      {session ? (
+        <>
+          <Link
+            href={
+              session.user?.email === "a@gmail.com"
+                ? "/admin"
+                : "/dashboard"
+            }
+            onClick={() => setMobileOpen(false)}
+            className="hover:text-purple-500"
+          >
+            Dashboard
+          </Link>
+
+          <button
+            onClick={() => signOut()}
+            className="text-left text-red-400"
+          >
+            Logout
+          </button>
+        </>
+      ) : (
+        <>
+          <Link
+            href="/login"
+            onClick={() => setMobileOpen(false)}
+          >
+            Login
+          </Link>
+
+          <Link
+            href="/register"
+            onClick={() => setMobileOpen(false)}
+            className="bg-purple-600 text-center rounded-xl py-3"
+          >
+            Get Started
+          </Link>
+        </>
+      )}
+
+    </div>
+  </motion.div>
+)}
   </motion.header>
 );
 }
