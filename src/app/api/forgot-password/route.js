@@ -8,9 +8,46 @@ import { forgotPasswordLimiter } from "../../../../lib/ratelimit";
 export async function POST(req) {
 
     try {
+        const { email,captchaToken } = await req.json();
+        if (!captchaToken) {
+  return NextResponse.json(
+    {
+      message: "Please complete the CAPTCHA.",
+    },
+    {
+      status: 400,
+    }
+  );
+}
+const verifyResponse = await fetch(
+  "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type":
+        "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams({
+      secret: process.env.TURNSTILE_SECRET_KEY,
+      response: captchaToken,
+       remoteip: ip,
+    }),
+  }
+);
 
-        await connectMongodb();
-        const forwardedFor = req.headers.get("x-forwarded-for");
+const verifyData =
+  await verifyResponse.json();
+  if (!verifyData.success) {
+  return NextResponse.json(
+    {
+      message: "CAPTCHA verification failed.",
+    },
+    {
+      status: 400,
+    }
+  );
+}
+const forwardedFor = req.headers.get("x-forwarded-for");
 const ip = forwardedFor
   ? forwardedFor.split(",")[0].trim()
   : "127.0.0.1";
@@ -29,8 +66,7 @@ if (!success) {
     }
   );
 }
-
-        const { email } = await req.json();
+    await connectMongodb();
 
         const user = await User.findOne({ email });
 

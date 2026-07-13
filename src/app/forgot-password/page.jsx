@@ -1,11 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import TurnstileCaptcha from "@/component/TurnstileCaptcha";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [captchaToken, setCaptchaToken] =
+  useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +21,7 @@ export default function ForgotPassword() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ email, captchaToken, }),
     });
 
     const data = await res.json();
@@ -55,9 +58,13 @@ export default function ForgotPassword() {
             }
             className="w-full bg-black border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-purple-500"
           />
-
+          <TurnstileCaptcha
+  onSuccess={(token) =>
+    setCaptchaToken(token)
+  }
+/>
           <button
-            disabled={loading}
+            disabled={loading || !captchaToken}
             className="w-full bg-purple-600 hover:bg-purple-700 py-4 rounded-xl font-semibold transition"
           >
             {loading
