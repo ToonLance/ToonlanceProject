@@ -47,6 +47,7 @@ export default function Registerform(){
                 name,email,password
             })
         });
+          const data = await res.json();
         if(res.ok){
            const form= e.target;
             form.reset();
@@ -54,6 +55,10 @@ export default function Registerform(){
         }
         else{
             console.log("user registrartion failed")
+        }
+        if(data.message){
+             Seterror(data.message);
+             return
         }
      } catch (error) {
         console.log("user registration failed",error);
@@ -68,7 +73,20 @@ export default function Registerform(){
        <form onSubmit={handle} className="flex flex-col gap-3">
          <input onChange={(e)=> Setname(e.target.value)} type="text" placeholder="Full name"/>
         <input  onChange={(e) => Setemail(e.target.value)}type="text" placeholder="email"/>
-        <input   onChange={(e) => Setpassword(e.target.value)} type="text" placeholder="password"/>
+        <input   onChange={(e) => Setpassword(e.target.value)} type="password" placeholder="password"/>
+        <div className="border-style: solid border-indigo-500">
+        <p className="text-sm text-zinc-400 ">
+Password must contain:
+</p>
+
+<ul className="text-sm text-zinc-500 list-disc ml-5 space-y-1">
+  <li>Minimum 8 characters</li>
+  <li>One uppercase letter</li>
+  <li>One lowercase letter</li>
+  <li>One number</li>
+  <li>One special character</li>
+</ul>
+</div>
         <button className="bg-green-600 text-white font-bold cursor-pointer px-6 py-2">Register</button>
 {error&&(
         <div className="bg-red-600 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">{error}</div>

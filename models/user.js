@@ -20,8 +20,14 @@ provider: {
   type: String,
   default: "credentials",
 },
-
-
+resetToken:{
+    type: String,
+    default: null,
+},
+resetTokenExpiry:{
+    type: Date,
+    default: null,
+},
 },{timestamps:true});
 
 const User=models.User||mongoose.model("User",userSchema);

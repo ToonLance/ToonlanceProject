@@ -54,6 +54,12 @@ export default function Loginform(){
 
 )}
  </form>
+ <Link
+  href="/forgot-password"
+  className="text-sm text-purple-400 hover:underline"
+>
+  Forgot Password?
+</Link>
        <button
   onClick={() =>
     signIn("google", {

@@ -2,12 +2,24 @@ import { connectMongodb } from "../../../../lib/mongodb";
 import User from "../../../../models/user";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
+import { isStrongPassword } from "../../../../lib/passwordvalidator";
 
 
 
 export  async function POST(req){
     try {
          const {name,email,password}= await req.json();
+         if (!isStrongPassword(password)) {
+  return NextResponse.json(
+    {
+      message:
+        "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character."
+    },
+    {
+      status:400,
+    }
+  );
+}
          const hashpassword=await bcrypt.hash(password,10);
          await connectMongodb();
          await User.create({name,email,password:hashpassword});
