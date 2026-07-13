@@ -4,11 +4,31 @@ import crypto from "crypto";
 import { connectMongodb } from "../../../../lib/mongodb";
 import User from "../../../../models/user";
 import { resend } from "../../../../lib/resend";
+import { forgotPasswordLimiter } from "../../../../lib/ratelimit";
 export async function POST(req) {
 
     try {
 
         await connectMongodb();
+        const forwardedFor = req.headers.get("x-forwarded-for");
+const ip = forwardedFor
+  ? forwardedFor.split(",")[0].trim()
+  : "127.0.0.1";
+
+const { success } =
+  await forgotPasswordLimiter.limit(ip);
+
+if (!success) {
+  return NextResponse.json(
+    {
+      message:
+        "Too many password reset requests. Please try again in 15 minutes.",
+    },
+    {
+      status: 429,
+    }
+  );
+}
 
         const { email } = await req.json();
 
