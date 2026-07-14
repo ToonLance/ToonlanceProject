@@ -5,15 +5,11 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-
-
-
-
-
+import { Eye, EyeOff } from "lucide-react";
 
 
 export default function Loginform(){
-
+    const [showPassword, setShowPassword] = useState(false);
     const[email,Setemail]=useState("");
     const[password,Setpassword]=useState("");
     const[error,Seterror]=useState("");
@@ -45,8 +41,23 @@ export default function Loginform(){
       <h1 className="text-xl font-bold my-4">Login</h1>
 
        <form  onSubmit={handelsubmit} className="flex flex-col gap-3">
-        <input  onChange={(e)=>Setemail(e.target.value)} type="text" placeholder="email"/>
-        <input  onChange={(e)=>Setpassword(e.target.value)} type="text" placeholder="password"/>
+        <input  onChange={(e)=>Setemail(e.target.value)} type="email" placeholder="email"/>
+        <div className="relative">
+        <input  onChange={(e)=>Setpassword(e.target.value)} type={showPassword ? "text" : "password"} placeholder="password"/>
+          <button
+    type="button"
+    onClick={() =>
+      setShowPassword(!showPassword)
+    }
+    className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white transition"
+  >
+    {showPassword ? (
+      <EyeOff size={20} />
+    ) : (
+      <Eye size={20} />
+    )}
+  </button>
+        </div>
         <button className="bg-green-600 text-white font-bold cursor-pointer px-6 py-2">Login</button>
 
 {error&&(
@@ -56,7 +67,7 @@ export default function Loginform(){
  </form>
  <Link
   href="/forgot-password"
-  className="text-sm text-purple-400 hover:underline"
+  className="text-sm text-white-400 hover:underline"
 >
   Forgot Password?
 </Link>

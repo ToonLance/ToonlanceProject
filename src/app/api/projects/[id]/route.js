@@ -1,9 +1,15 @@
 import { NextResponse } from "next/server";
 import Project from "../../../../../models/project";
 import { connectMongodb } from "../../../../../lib/mongodb";
+import { requireAdmin } from "../../../../../lib/requireadmin";
 
 export async function GET(req, { params }) {
   try {
+    const adminError = await requireAdmin();
+
+if (adminError) {
+  return adminError;
+}
     await connectMongodb();
 
     const { id } = await params;
@@ -32,6 +38,11 @@ export async function PATCH(
   { params }
 ) {
   try {
+     const adminError = await requireAdmin();
+
+if (adminError) {
+  return adminError;
+}
     await connectMongodb();
 
     const { id } = await params;
@@ -83,6 +94,11 @@ export async function DELETE(
   { params }
 ) {
   try {
+     const adminError = await requireAdmin();
+
+if (adminError) {
+  return adminError;
+}
     await connectMongodb();
 
     const { id } = await params;

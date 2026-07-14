@@ -3,8 +3,11 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from "lucide-react";
+import { signIn } from "next-auth/react";
 
 export default function Registerform(){
+  const [showPassword, setShowPassword] = useState(false);
     const[name,Setname]=useState("");
     const[email,Setemail]=useState("");
     const[password,Setpassword]=useState("");
@@ -65,16 +68,36 @@ export default function Registerform(){
      }
     }
     return(
-       <div className="grid place-items-center h-screen">
-   <div className="shadow-lg p-5 rounded-lg border-t-4 border-green-400">
+     <div className="min-h-screen grid place-items-center px-4 py-8">
+ <div className="w-full max-w-md rounded-2xl border-t-4 border-green-400 shadow-lg p-5 sm:p-8">
+  
       
-      <h1 className="text-xl font-bold my-4">Register</h1>
+     <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center">Register</h1>
 
-       <form onSubmit={handle} className="flex flex-col gap-3">
-         <input onChange={(e)=> Setname(e.target.value)} type="text" placeholder="Full name"/>
-        <input  onChange={(e) => Setemail(e.target.value)}type="text" placeholder="email"/>
-        <input   onChange={(e) => Setpassword(e.target.value)} type="password" placeholder="password"/>
-        <div className="border-style: solid border-indigo-500">
+       <form onSubmit={handle}  className="flex flex-col gap-4 w-full">
+         <input onChange={(e)=> Setname(e.target.value)} type="text" placeholder="Full name" className="w-full rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3 outline-none focus:border-purple-500 transition"/>
+        <input  onChange={(e) => Setemail(e.target.value)}type="email" placeholder="email"  className="w-full rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3 outline-none focus:border-purple-500 transition"/>
+        <div className="relative">
+
+        
+        <input   onChange={(e) => Setpassword(e.target.value)}  type={showPassword ? "text" : "password"} placeholder="password" className="w-full rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3 outline-none focus:border-purple-500 transition"/>
+          <button
+    type="button"
+    onClick={() =>
+      setShowPassword(!showPassword)
+    }
+    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white transition"
+  >
+    {showPassword ? (
+      <EyeOff size={20} />
+    ) : (
+      <Eye size={20} />
+    )}
+  </button>
+
+
+        </div>
+        <div className="border border-indigo-500 rounded-lg p-3">
         <p className="text-sm text-zinc-400 ">
 Password must contain:
 </p>
@@ -87,9 +110,9 @@ Password must contain:
   <li>One special character</li>
 </ul>
 </div>
-        <button className="bg-green-600 text-white font-bold cursor-pointer px-6 py-2">Register</button>
+        <button className="w-full rounded-xl bg-green-600 py-3 font-semibold hover:bg-green-700 transition">Register</button>
 {error&&(
-        <div className="bg-red-600 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">{error}</div>
+       <div className="w-full bg-red-600 text-white text-sm py-2 px-3 rounded-md mt-2 break-words">{error}</div>
 )}
         
        </form>
@@ -99,7 +122,7 @@ Password must contain:
          callbackUrl: "/",
        })
      }
-     className="w-full flex items-center justify-center gap-3 bg-zinc-900 border border-white/10 hover:border-purple-500 hover:bg-zinc-800 transition-all duration-300 rounded-2xl py-3.5 font-medium text-white hover:shadow-lg hover:shadow-purple-500/20 active:scale-[0.98] mt-5 p-5 mb-2 "
+     className="w-full flex items-center justify-center gap-3 bg-zinc-900 border border-white/10 hover:border-purple-500 hover:bg-zinc-800 transition-all duration-300 rounded-2xl py-3.5 font-medium text-white hover:shadow-lg hover:shadow-purple-500/20 active:scale-[0.98] mt-5 px-4 py-3 mb-2 "
    >
      <svg
        xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +149,7 @@ Password must contain:
    
      <span>Continue with Google</span>
    </button>
-   <Link href={'/login'} className="text-sm mt-3 text-right"> Already have a account? <span className="underline">Login</span> </Link>
+   <Link href={'/login'} className="text-sm mt-3 text-center mt-4"> Already have a account? <span className="underline">Login</span> </Link>
     </div>
     </div>
     )

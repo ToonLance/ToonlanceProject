@@ -29,24 +29,24 @@ export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-black mt-20">
 
-      <div className="max-w-7xl mx-auto px-6 py-16">
+     <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-12 sm:py-16">
 
         {/* Top Section */}
 
-        <div className="grid lg:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
 
           {/* Logo */}
 
-          <div>
+          <div className="text-center md:text-left">
 
-            <h2 className="text-4xl font-bold">
+            <h2 className="text-3xl sm:text-4xl font-bold">
               Toon
               <span className="text-purple-500">
                 lance
               </span>
             </h2>
 
-            <p className="text-zinc-400 mt-5 leading-7 max-w-sm">
+            <p className="text-zinc-400 mt-5 leading-7 max-w-sm mx-auto md:mx-0">
               Premium 2D animation studio creating cinematic stories,
               custom animation, storyboards and visual experiences.
             </p>
@@ -55,13 +55,13 @@ export default function Footer() {
 
           {/* Quick Links */}
 
-          <div>
+          <div className="text-center md:text-left">
 
             <h3 className="text-xl font-semibold mb-6">
               Quick Links
             </h3>
 
-            <div className="flex flex-col gap-4 text-zinc-400">
+           <div className="flex flex-col gap-3 text-zinc-400">
 
               <Link
                 href="/"
@@ -104,18 +104,18 @@ export default function Footer() {
 
           {/* Social */}
 
-          <div>
+         <div className="text-center md:text-left">
 
             <h3 className="text-xl font-semibold mb-6">
               Connect With Us
             </h3>
 
-            <div className="flex gap-4">
+           <div className="flex justify-center md:justify-start gap-4 flex-wrap">
 
               <Link
                 href="https://www.instagram.com/toonlance/"
                 target="_blank"
-                className="w-12 h-12 rounded-full bg-zinc-900 border border-white/10 flex items-center justify-center hover:bg-purple-600 transition"
+                className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-zinc-900 border border-white/10 flex items-center justify-center hover:bg-purple-600 transition"
               >
                <FaInstagram size={22} />
               </Link>
@@ -123,7 +123,7 @@ export default function Footer() {
               <Link
                 href="https://x.com/TOONLANCE281374"
                 target="_blank"
-                className="w-12 h-12 rounded-full bg-zinc-900 border border-white/10 flex items-center justify-center hover:bg-purple-600 transition"
+                className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-zinc-900 border border-white/10 flex items-center justify-center hover:bg-purple-600 transition"
               >
                <FaTwitter size={22} />
               </Link>
@@ -131,7 +131,7 @@ export default function Footer() {
               <Link
                 href="https://www.youtube.com/@TOONLANCE"
                 target="_blank"
-                className="w-12 h-12 rounded-full bg-zinc-900 border border-white/10 flex items-center justify-center hover:bg-purple-600 transition"
+                className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-zinc-900 border border-white/10 flex items-center justify-center hover:bg-purple-600 transition"
               >
                <FaYoutube size={22} />
               </Link>
@@ -139,14 +139,14 @@ export default function Footer() {
               <Link
                 href="https://discord.gg/"
                 target="_blank"
-                className="w-12 h-12 rounded-full bg-zinc-900 border border-white/10 flex items-center justify-center hover:bg-purple-600 transition"
+                className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-zinc-900 border border-white/10 flex items-center justify-center hover:bg-purple-600 transition"
               >
                <FaDiscord size={22} />
               </Link>
 
             </div>
 
-            <p className="text-zinc-500 mt-6">
+           <p className="text-zinc-500 mt-6 break-all">
               toonlanceservice@gmail.com
             </p>
 
@@ -156,22 +156,31 @@ export default function Footer() {
 
         {/* Bottom */}
 
-        <div className="border-t border-white/10 mt-14 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+       <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
 
-          <div>
+         <div className="space-y-3">
 
             <p className="text-zinc-500 text-center md:text-left">
               © 2026 Toonlance. All Rights Reserved.
             </p>
 
-            <p className="text-zinc-500 flex items-center justify-center gap-2 text-sm tracking-wide">
+           <p className="text-zinc-500 flex flex-wrap items-center justify-center md:justify-start gap-2 text-sm tracking-wide">
 
   Created with
 
   <Heart
-    size={18}
-    className="fill-red-500 text-red-500 transition-all duration-300 hover:fill-white hover:text-white hover:scale-125 hover:drop-shadow-[0_0_10px_white] cursor-pointer"
-  />
+  size={18}
+  className="
+    fill-red-500 text-red-500
+    animate-pulse
+    md:animate-none
+    transition-all duration-300
+    md:hover:fill-white
+    md:hover:text-white
+    md:hover:scale-125
+    md:hover:drop-shadow-[0_0_12px_white]
+  "
+/>
 
   by{" "}
 

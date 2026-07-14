@@ -8,7 +8,9 @@ import { forgotPasswordLimiter } from "../../../../lib/ratelimit";
 export async function POST(req) {
 
     try {
-        const { email,captchaToken } = await req.json();
+       const body = await req.json();
+const captchaToken = body.captchaToken;
+const email = body.email.trim().toLowerCase();
         if (!captchaToken) {
   return NextResponse.json(
     {
@@ -19,6 +21,10 @@ export async function POST(req) {
     }
   );
 }
+const forwardedFor = req.headers.get("x-forwarded-for");
+const ip = forwardedFor
+  ? forwardedFor.split(",")[0].trim()
+  : "127.0.0.1";
 const verifyResponse = await fetch(
   "https://challenges.cloudflare.com/turnstile/v0/siteverify",
   {
@@ -47,10 +53,7 @@ const verifyData =
     }
   );
 }
-const forwardedFor = req.headers.get("x-forwarded-for");
-const ip = forwardedFor
-  ? forwardedFor.split(",")[0].trim()
-  : "127.0.0.1";
+
 
 const { success } =
   await forgotPasswordLimiter.limit(ip);

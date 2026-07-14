@@ -1,9 +1,15 @@
 import { NextResponse } from "next/server";
 import { connectMongodb } from "../../../../lib/mongodb";
 import Project from "../../../../models/project";
+import { requireAdmin } from "../../../../lib/requireadmin";
 
 export async function POST(req) {
   try {
+    const adminError = await requireAdmin();
+
+if (adminError) {
+  return adminError;
+}
    await connectMongodb();
     const body = await req.json();
 

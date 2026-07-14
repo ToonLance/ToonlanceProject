@@ -6,9 +6,17 @@ import { isStrongPassword } from "../../../../lib/passwordvalidator";
 
 
 
+
 export  async function POST(req){
     try {
-         const {name,email,password}= await req.json();
+         const body = await req.json();
+const name = body.name;
+const email = body.email.trim().toLowerCase();
+const password = body.password;
+    
+
+
+
          if (!isStrongPassword(password)) {
   return NextResponse.json(
     {

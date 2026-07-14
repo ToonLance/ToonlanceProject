@@ -16,7 +16,8 @@ export const authOptions={
         credentials:{},
 
         async authorize(credentials){
-          const{email,password} = credentials;
+          const{email:rawEmail,password} = credentials;
+          const email = rawEmail.trim().toLowerCase();
           try {
              await connectMongodb();
             const user=await User.findOne({email});

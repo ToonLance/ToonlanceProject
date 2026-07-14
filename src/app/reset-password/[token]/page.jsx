@@ -1,6 +1,7 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
+import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 
 export default function ResetPassword() {
@@ -8,6 +9,9 @@ export default function ResetPassword() {
   const router = useRouter();
 
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+  useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [loading, setLoading] = useState(false);
@@ -64,9 +68,10 @@ export default function ResetPassword() {
           onSubmit={handleSubmit}
           className="space-y-5"
         >
-
+          
+          <div className="relative">
           <input
-            type="password"
+          type={showPassword ? "text" : "password"}
             placeholder="New Password"
             required
             value={password}
@@ -75,9 +80,27 @@ export default function ResetPassword() {
             }
             className="w-full bg-black border border-white/10 rounded-xl px-5 py-4 focus:border-purple-500 outline-none"
           />
-
+            <button
+    type="button"
+    onClick={() =>
+      setShowPassword(!showPassword)
+    }
+    className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white transition"
+  >
+    {showPassword ? (
+      <EyeOff size={20} />
+    ) : (
+      <Eye size={20} />
+    )}
+  </button>
+ </div>
+ <div className="relative">
           <input
-            type="password"
+          type={
+  showConfirmPassword
+    ? "text"
+    : "password"
+}
             placeholder="Confirm Password"
             required
             value={confirmPassword}
@@ -86,6 +109,21 @@ export default function ResetPassword() {
             }
             className="w-full bg-black border border-white/10 rounded-xl px-5 py-4 focus:border-purple-500 outline-none"
           />
+
+  <button
+    type="button"
+    onClick={() =>
+      setShowConfirmPassword(!showConfirmPassword)
+    }
+    className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white transition"
+  >
+    {showConfirmPassword ? (
+      <EyeOff size={20} />
+    ) : (
+      <Eye size={20} />
+    )}
+  </button>
+          </div>
           <p className="text-sm text-zinc-400">
 Password must contain:
 </p>
