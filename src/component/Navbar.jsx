@@ -243,7 +243,7 @@ useEffect(() => {
 
           <Link
             href={
-              session.user?.email === "a@gmail.com"
+              session.user?.email === process.env.ADMIN_EMAIL
                 ? "/admin"
                 : "/dashboard"
             }
