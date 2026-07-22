@@ -17,6 +17,10 @@ export default function ProjectPage() {
     try {
     const res = await fetch(`/api/projects/${params.id}`);
     const data = await res.json();
+    if (!res.ok) {
+  console.error(data.message);
+  return;
+}
     setProject(data);
   } finally {
     setLoading(false);
@@ -32,7 +36,6 @@ export default function ProjectPage() {
       </div>
     );
   }
-
   const completed = project.tasks.filter(
     (task) => task.completed
   ).length;

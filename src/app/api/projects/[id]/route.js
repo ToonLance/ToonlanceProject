@@ -7,9 +7,6 @@ export async function GET(req, { params }) {
   try {
     const adminError = await requireAdmin();
 
-if (adminError) {
-  return adminError;
-}
     await connectMongodb();
 
     const { id } = await params;
