@@ -192,11 +192,11 @@ export default function Footer() {
     Chirag Agrawal
   </Link>
 
-  {/* &
+  &
 
   <span className="text-white">
     Kartik Mishra
-  </span> */}
+  </span>
 
 </p>
           </div>

@@ -143,7 +143,7 @@ useEffect(() => {
         href="/"
        className="text-2xl md:text-3xl font-bold tracking-wide"
       >
-        Ani<span className="text-purple-500">Mation</span>
+        Toon<span className="text-purple-500">Lance</span>
       </Link>
 
       {/* Desktop Links */}
