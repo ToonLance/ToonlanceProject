@@ -54,12 +54,15 @@ export default function Page() {
 
   return (
     <div className="bg-black text-white">
-      <section id="hero" className="scroll-section scroll-mt-28">
+      <section id="hero"  className="relative h-[100svh] overflow-hidden scroll-section scroll-mt-28">
         <video
           autoPlay
           muted
           loop
-          className="w-full h-screen object-cover"
+          playsInline
+          controls={false}
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
         >
           <source src="/trans.mp4" type="video/mp4" />
         </video>
@@ -70,8 +73,16 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="min-h-[100svh] flex flex-col lg:flex-row items-center justify-between px-5 sm:px-8 md:px-16 lg:px-32 gap-16 bg-black">
-        <div className="flex-1 max-w-xl">
+      <section className="
+  py-20 sm:py-24
+  lg:min-h-screen lg:py-24
+  flex flex-col lg:flex-row
+  items-center justify-center
+  px-5 sm:px-8 md:px-12 lg:px-20 xl:px-32
+  gap-10 md:gap-14 lg:gap-16
+  bg-black
+">
+        <div className="w-full lg:flex-1 max-w-xl text-center lg:text-left">
           <p className="uppercase tracking-[0.4em] text-neutral-500 text-sm mb-6">
             Showcase
           </p>
@@ -82,7 +93,7 @@ export default function Page() {
             <span className="font-semibold">Work</span>
           </h2>
 
-          <div className="w-20 h-px bg-white mb-8"></div>
+         <div className="w-20 h-px bg-white mb-8 mx-auto lg:mx-0"></div>
 
           <p className="text-neutral-400 text-base md:text-lg leading-relaxed">
             A collection of our latest animation projects, visual storytelling,
@@ -91,7 +102,7 @@ export default function Page() {
           </p>
         </div>
 
-        <div className="flex-1 w-full">
+     <div className="w-full lg:flex-1 max-w-2xl">
           <div className="border border-white/10 rounded-3xl overflow-hidden backdrop-blur-sm">
             <iframe
               className="w-full aspect-video"
@@ -149,7 +160,7 @@ export default function Page() {
               Pricing
             </p>
 
-            <h2 className="text-5xl sm:text-6xl md:text-8xl font-light mb-8">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-light mb-6 md:mb-8">
               Simple &
               <span className="font-semibold"> Transparent</span>
             </h2>
@@ -174,14 +185,15 @@ export default function Page() {
                 </p>
               </div>
 
-              <div>
-                <span className="text-6xl md:text-8xl font-semibold">
-                  $400
-                </span>
-                <span className="text-neutral-500 text-xl ml-3">
-                  / minute
-                </span>
-              </div>
+           <div className="flex flex-wrap items-end gap-x-3 gap-y-1">
+  <span className="text-5xl sm:text-6xl md:text-8xl font-semibold">
+    $400
+  </span>
+
+  <span className="text-neutral-500 text-base sm:text-xl pb-1">
+    / minute
+  </span>
+</div>
             </div>
 
             <div className="w-full h-px bg-white/10 my-10"></div>
@@ -211,7 +223,7 @@ export default function Page() {
               Testimonials
             </p>
 
-            <h2 className="text-5xl md:text-7xl font-light mb-8">
+            <h2 className="text-3xl sm:text-5xl md:text-7xl font-light mb-8">
               Trusted By
               <span className="font-semibold"> Studios</span>
             </h2>
@@ -287,7 +299,7 @@ export default function Page() {
               Contact
             </p>
 
-            <h2 className="text-5xl md:text-7xl font-light mb-8">
+            <h2 className="text-3xl sm:text-5xl md:text-7xl font-light mb-8">
               Let's Create
               <span className="font-semibold"> Something Amazing</span>
             </h2>
@@ -368,7 +380,7 @@ export default function Page() {
 
             <form
               onSubmit={handleSubmit}
-              className="bg-white/[0.03] border border-white/10 rounded-3xl p-10 space-y-6"
+              className="bg-white/[0.03] border border-white/10 rounded-3xl p-5 sm:p-8 md:p-10 space-y-6"
             >
               <div className="grid md:grid-cols-2 gap-5">
                 <div>
