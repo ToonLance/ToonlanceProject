@@ -185,7 +185,7 @@ export default function Footer() {
   by{" "}
 
   <Link
-    href="https://chirag-portfolio-c1a1a4.webflow.io"
+    href="https://www.linkedin.com/in/chirag-agrawal-936635329"
     target="_blank"
     className="text-white hover:text-purple-400 transition"
   >
